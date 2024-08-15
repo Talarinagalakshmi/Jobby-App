@@ -1,0 +1,47 @@
+.list {
+  color: #ffffff;
+}
+.list-item {
+  background-color: #475569;
+  border-radius: 10px;
+  width: 80%;
+  list-style-type: none;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.hr-line {
+  background-color: #cbd5e1;
+  width: 100%;
+}
+.heading {
+  font-size: 25px;
+  color: #b6c5ff;
+}
+.description {
+  color: #f1f5f9;
+  font-size: 15px;
+  
+}
+.location-packagePerAnnum-container {
+  display: flex;
+  justify-content: space-between;
+}
+.location-employmentType-container {
+  display: flex;
+}
+.location {
+  padding-right: 10px;
+}
+.img-title-rating-container {
+  display: flex;
+  align-items: center;
+}
+.logo-url {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+.icon-container {
+  display: flex;
+  align-items: center;
+}
