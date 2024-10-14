@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner'
 import './index.css'
 
 import Skillscard from '../Skillscard'
-
+import SimilarjobCard from '../SimilarjobCard'
 import {BsFillBriefcaseFill, BsStarFill} from 'react-icons/bs'
 import {MdLocationOn} from 'react-icons/md'
 import {BiLinkExternal} from 'react-icons/bi'
@@ -86,22 +86,30 @@ class JobItemDetails extends Component {
     }
   }
   renderFailureView = () => (
-    <div className="failure-container">
+    <div className="job-item-error-view-container">
       <img
         src="https://assets.ccbp.in/frontend/react-js/failure-img.png "
-        className="failure-view"
+        className="job-item-failure-img"
         alt="failure view"
       />
-      <h1 className="failure-heading">Oops! Something Went Wrong </h1>
-      <p className="failure-description">
+      <h1 className="job-item-failure-heading-text">
+        Oops! Something Went Wrong{' '}
+      </h1>
+      <p className="job-item-failure-description">
         We cannot seem to find the page you are looking for
       </p>
-      <button type="button" onClick={this.getJobsData} className="failure-button">Retry</button>
+      <button
+        type="button"
+        onClick={this.getJobsData}
+        className="job-item-failure-button"
+      >
+        Retry
+      </button>
     </div>
   )
 
   renderLoadingView = () => (
-    <div className="loader-container" data-testid="loader">
+    <div className="job-item-loader-container" data-testid="loader">
       <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
     </div>
   )
@@ -120,53 +128,71 @@ class JobItemDetails extends Component {
       lifeAtCompany,
       skills,
     } = jobData
+    const {description, imageUrl} = lifeAtCompany
 
     return (
-      <div className="Job-details-container">
-        <div className="image-heading-container">
-          <img
-            src={companyLogoUrl}
-            className="logo-url"
-            alt="job details company logo"
-          />
-          <div className="title-rating-container">
-            <h1>{title}</h1>
-            <div className="icon-title-container">
-              <BsStarFill />
-              <p>{rating}</p>
+      <div className="Job-details-view-container">
+        <div className="job-item">
+          <div className="logo-title-location-container">
+            <div className="logo-title-container">
+              <img
+                src={companyLogoUrl}
+                className="company-logo"
+                alt="job details company logo"
+              />
+              <div className="title-rating-container">
+                <h1 className="title-heading">{title}</h1>
+                <div className="rating-container">
+                  <BsStarFill className="rating-icon" />
+                  <p className="rating-heading">{rating}</p>
+                </div>
+              </div>
+            </div>
+            <div className="location-package-container">
+              <div className="location-employee-container">
+                <div className="location-container">
+                  <MdLocationOn className="location-icon" />
+                  <p className="location-heading">{location}</p>
+                </div>
+                <div className="employee-type-container">
+                  <BsFillBriefcaseFill className="brief-case-icon" />
+                  <p className="employee-type-heading">{employmentType}</p>
+                </div>
+              </div>
+              <p className="package-heading">{packagePerAnnum}</p>
             </div>
           </div>
-        </div>
-        <div className="container">
-          <div className="location-employmentType-container">
-            <div className="icon-title-container">
-              <MdLocationOn />
-              <p>{location}</p>
-            </div>
-            <div className="icon-title-container">
-              <BsFillBriefcaseFill />
-              <p>{employmentType}</p>
+          <hr className="hr-line" />
+          <div className="description-visit-container">
+            <h1 className="description-heading">Description</h1>
+            <div className="visit-container">
+              <a href={companyWebsiteUrl} className="visit-heading">
+                Visit
+              </a>
+              <BiLinkExternal className="visit-icon" />
             </div>
           </div>
-          <p>{packagePerAnnum}</p>
-        </div>
-        <hr className="hr-line" />
-        <div className="container">
-          <h1 className="heading">Description</h1>
-          <div className="icon-title-container">
-            <a href={companyWebsiteUrl} className="visit-icon">
-              Visit
-            </a>
-            <BiLinkExternal />
+          <p className="description-text">{jobDescription}</p>
+          <h1 className="skills-heading">Skills</h1>
+          <ul className="skills-list-container">
+            {skills.map(eachSkill => (
+              <Skillscard skillDetails={eachSkill} key={eachSkill.name} />
+            ))}
+          </ul>
+          <h1 className="life-at-company-heading">Life at Company</h1>
+          <div className="life-at-company-description-image-container">
+            <p className="life-at-company-description">{description}</p>
+            <img
+              src={imageUrl}
+              alt="Life at Company"
+              className="life-at-company-image"
+            />
           </div>
         </div>
-        <p className="description">{jobDescription}</p>
-        <h1 className="heading">Skills</h1>
-        <h1 className="heading">Life at Company</h1>
-        <h1 className="heading">similar Jobs</h1>
-        <ul className="list">
+        <h1 className="similar-jobs-heading">similar Jobs</h1>
+        <ul className="similar-jobs-list">
           {simililarJobsData.map(eachSkill => (
-            <Skillscard jobdetails={eachSkill} key={eachSkill.id} />
+            <SimilarjobCard jobdetails={eachSkill} key={eachSkill.id} />
           ))}
         </ul>
       </div>

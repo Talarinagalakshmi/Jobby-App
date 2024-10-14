@@ -20,7 +20,7 @@ class Profile extends Component {
 
   getProfile = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
-    const {profileData} = this.state
+
     const token = Cookies.get('jwt_token')
     const apiUrl = `https://apis.ccbp.in/profile`
     const options = {
@@ -54,14 +54,18 @@ class Profile extends Component {
     return (
       <div className="profile-container">
         <img src={profileImageUrl} alt="profile" className="profile-image" />
-        <h1>{name}</h1>
-        <p>{shortBio}</p>
+        <h1 className="profile-heading">{name}</h1>
+        <p className="profile-bio">{shortBio}</p>
       </div>
     )
   }
   renderFailureView = () => (
-    <div className="failure-button">
-      <button className="button" type="button" onClick={this.getProfile}>
+    <div className="failure-container">
+      <button
+        className="failure-button"
+        type="button"
+        onClick={this.getProfile}
+      >
         Retry
       </button>
     </div>

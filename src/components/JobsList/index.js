@@ -15,37 +15,41 @@ const JobsList = props => {
     packagePerAnnum,
   } = jobDetails
   return (
-    <Link to={`/jobs/${id}`}>
-      <li className="list-item">
-        <div className="logo-title-container">
-          <div className="img-title-rating-container">
-            <img src={companyLogoUrl} className="logo-url" alt="company logo" />
-            <div>
-              <h1>{title}</h1>
-              <div className="icon-container">
-                <BsStarFill />
-                <p>{rating}</p>
+    <Link to={`/jobs/${id}`} className="link-item">
+      <li className="job-item">
+        <div className="logo-title-location-container">
+          <div className="logo-title-container">
+            <img
+              src={companyLogoUrl}
+              className="company-logo"
+              alt="company logo"
+            />
+            <div className="title-rating-container">
+              <h1 className="title-heading">{title}</h1>
+              <div className="rating-container">
+                <BsStarFill className="rating-icon" />
+                <p className="rating-heading">{rating}</p>
               </div>
             </div>
           </div>
 
-          <div className="location-packagePerAnnum-container">
-            <div className="location-employmentType-container">
-              <div className="icon-container">
-                <MdLocationOn />
-                <p className="location">{location}</p>
+          <div className="location-package-container">
+            <div className="location-employee-container">
+              <div className="location-container">
+                <MdLocationOn className="location-icon" />
+                <p className="location-heading">{location}</p>
               </div>
-              <div className="icon-container">
-                <BsFillBriefcaseFill />
-                <p>{employmentType}</p>
+              <div className="employee-type-container">
+                <BsFillBriefcaseFill className="brief-case-icon" />
+                <p className="employee-type-heading">{employmentType}</p>
               </div>
             </div>
 
-            <p>{packagePerAnnum}</p>
+            <p className="package-heading">{packagePerAnnum}</p>
           </div>
           <hr className="hr-line" />
-          <h1 className="heading">Description</h1>
-          <p className="description"> {jobDescription}</p>
+          <h1 className="description-heading">Description</h1>
+          <p className="description-text"> {jobDescription}</p>
         </div>
       </li>
     </Link>

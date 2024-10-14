@@ -102,22 +102,22 @@ class Jobs extends Component {
     const renderJobsListlength = jobsList.length > 0
 
     return renderJobsListlength ? (
-      <div className="sub-job-container">
-        <ul className="jobs-list">
+      <div className='all-jobs-container'>
+        <ul className='jobs-list'>
           {jobsList.map(job => (
             <JobsList key={job.id} jobDetails={job} />
           ))}
         </ul>
       </div>
     ) : (
-      <div className="no-jobs-view">
+      <div className='no-jobs-view'>
         <img
-          src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
-          className="no-jobs"
-          alt="no jobs"
+          src='https://assets.ccbp.in/frontend/react-js/no-jobs-img.png'
+          className='no-jobs-img'
+          alt='no jobs'
         />
-        <h1 className="no-jobs-heading">No Jobs Found</h1>
-        <p className="no-jobs-description">
+        <h1 className='no-jobs-heading'>No Jobs Found</h1>
+        <p className='no-jobs-description'>
           We could not find any jobs. Try other filters.
         </p>
       </div>
@@ -125,24 +125,28 @@ class Jobs extends Component {
   }
 
   renderFailureView = () => (
-    <div className="failure-container">
+    <div className='jobs-error-view-container'>
       <img
-        src="https://assets.ccbp.in/frontend/react-js/failure-img.png "
-        className="failure-view"
-        alt="failure view"
+        src='https://assets.ccbp.in/frontend/react-js/failure-img.png '
+        className='jobs-failure-img'
+        alt='failure view'
       />
-      <h1 className="failure-heading">Oops! Something Went Wrong </h1>
-      <p className="failure-description">
+      <h1 className='jobs-failure-heading-text'>Oops! Something Went Wrong </h1>
+      <p className='jobs-failure-description'>
         We cannot seem to find the page you are looking for
       </p>
-      <button type="button" onClick={this.getjobs} className="failure-button">
+      <button
+        type='button'
+        onClick={this.getjobs}
+        className='jobs-failure-button'
+      >
         Retry
       </button>
     </div>
   )
   renderLoadingView = () => (
-    <div className="loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+    <div className='loader-container' data-testid='loader'>
+      <Loader type='ThreeDots' color='#ffffff' height='50' width='50' />
     </div>
   )
 
@@ -176,22 +180,28 @@ class Jobs extends Component {
   }
 
   changeEmployeeList = type => {
-    this.setState(
-      prevState => (
-        {
+    const {employeType} = this.state
+
+    const inputNotInList = employeType.filter(eachItem => eachItem === type)
+    if (inputNotInList.length === 0) {
+      this.setState(
+        prevState => ({
           employeType: [...prevState.employeType, type],
-        },
-        this.getjobs
-      ),
-    )
+        }),
+        this.getjobs,
+      )
+    } else {
+      const filteredData = employeType.filter(eachItem => eachItem !== type)
+      this.setState({employeType: filteredData}, this.getjobs)
+    }
   }
   render() {
     const {searchInput} = this.state
     return (
       <>
         <Header />
-        <div className="jobs-container">
-          <div className="image-container">
+        <div className='jobs-container'>
+          <div className='jobs-content'>
             <FilterItems
               employmentTypesList={employmentTypesList}
               salaryRangesList={salaryRangesList}
@@ -202,22 +212,23 @@ class Jobs extends Component {
               changeEmployeeList={this.changeEmployeeList}
             />
           </div>
-          <div className="search-container">
-            <div className="search-input-container">
+          <div className='search-input-jobs-list-container'>
+            <div className='search-input-container-desktop'>
               <input
                 onChange={this.changeSearchInput}
-                className="input"
-                type="search"
-                placeholder="Search"
+                className='search-input-desktop'
+                type='search'
+                placeholder='Search'
                 onKeyDown={this.onEnterSearchInput}
               />
               <button
-                type="button"
-                className="button"
-                data-testid="searchButton"
+                type='button'
+                className='search-button-container-desktop'
+                data-testid='searchButton'
                 onClick={this.getjobs}
               >
-                <BsSearch className="search-icon" />
+                <span className='visually-hidden'>Search</span>
+                <BsSearch className='search-icon-desktop' />
               </button>
             </div>
             {this.renderAllJobs()}

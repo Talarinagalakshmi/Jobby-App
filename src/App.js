@@ -5,7 +5,7 @@ import Jobs from './components/Jobs'
 import NotFound from './components/NotFound'
 import Login from './components/Login'
 import JobbsRoute from './components/JobbsRoute'
-import JobItemDetails from "./components/JobItemDetails"
+import JobItemDetails from './components/JobItemDetails'
 import './App.css'
 
 // These are the lists used in the application. You can move them to any component needed.
@@ -50,11 +50,12 @@ const salaryRangesList = [
 // Replace your code here
 const App = () => (
   <Switch>
-    <Route exact path="/login" component={Login} />
-    <JobbsRoute exact path="/" component={Home} />
-    <JobbsRoute exact path="/jobs" component={Jobs} />
-    <JobbsRoute exact path="/jobs/:id"  component={JobItemDetails} />
-    <Route component={NotFound} />
+    <Route exact path='/login' component={Login} />
+    <JobbsRoute exact path='/' component={Home} />
+    <JobbsRoute exact path='/jobs' component={Jobs} />
+    <JobbsRoute exact path='/jobs/:id' component={JobItemDetails} />
+    <Route path='/not-found' component={NotFound} />
+    <Redirect to='not-found' />
   </Switch>
 )
 
